@@ -6,16 +6,22 @@ from keystroke.model import *
 app = Flask(__name__)
 
 def find_user(user):
-    with open('keystroke/users.txt', 'r') as f:
+    with open('keystroke/userdata/users.txt', 'r') as f:
         users = f.read().splitlines()
         
-    return True if user in users else False   
+    return True if user in users else False 
+
+def add_user(user):
+    with open('keystroke/userdata/users.txt', 'r') as f:
+        f.write(f'\n{user}')
+
 
 @app.route("/new_client",  methods=['GET', 'POST'])
 def new_client():
     if request.method == 'POST':
         data = request.get_json()
         user = data['user']
+        add_user(user)
         keys = data['data']
         keys = convert_json(keys)
         save_capture_data_to_file(user, keys)
