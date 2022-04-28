@@ -31,7 +31,7 @@ def main():
     user = input('Input your name: ')
     if not is_registred(server_url, user):
         registration(server_url, user)
-    while True():
+    while True:
         check_user(server_url, user)
 
 if __name__ == '__main__':
