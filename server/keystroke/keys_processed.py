@@ -4,20 +4,19 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def convert_json(data):
-    return pd.json_normalize(data['data'])
+    return pd.json_normalize(data)
 
 def save_capture_data_to_file(user, data):  
-    data.to_csv(f'userdata/user_logs/{user}_logs.csv',  index=False) 
+    data.to_csv(f'keystroke/userdata/user_logs/{user}_logs.csv',  index=False) 
 
 def read_capture_data_from_file(user):     
-    return pd.read_csv(f'userdata/user_logs/{user}_logs.csv')
+    return pd.read_csv(f'keystroke/userdata/user_logs/{user}_logs.csv')
     
 def save_processed_data_to_file(user, data):
-    data.to_csv(f'userdata/processed_data/{user}_processed_data.csv', index=False) 
+    data.to_csv(f'keystroke/userdata/processed_data/{user}_processed_data.csv', index=False) 
 
-def processing_keys_from_file(user, data):
+def processing_keys(user, data):
 
-    data = pd.read_csv(f'userdata/user_logs/{user}_logs.csv')
     df = pd.DataFrame(columns=['keycode','HD','PPD','RPD', 'RRD', 'user'])
 
     event_len = len(data)

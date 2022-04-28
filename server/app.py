@@ -12,7 +12,7 @@ def find_user(user):
     return True if user in users else False 
 
 def add_user(user):
-    with open('keystroke/userdata/users.txt', 'r') as f:
+    with open('keystroke/userdata/users.txt', 'a+') as f:
         f.write(f'\n{user}')
 
 
@@ -25,7 +25,7 @@ def new_client():
         keys = data['data']
         keys = convert_json(keys)
         save_capture_data_to_file(user, keys)
-        processed_keys = processing_keys_from_file(user, keys)
+        processed_keys = processing_keys(user, keys)
         save_processed_data_to_file(user, processed_keys)
         create_and_train_model(user)
         return jsonify({'user':user, 'status':'Successfully'})
@@ -47,13 +47,13 @@ def is_registred():
 
 
 @app.route("/check_client",  methods=['GET', 'POST'])
-def new_client():
+def check_client():
     if request.method == 'POST':
         data = request.get_json()
         user = data['user']
         keys = data['data']
         keys = convert_json(keys)
-        processed_keys = processing_keys_from_file(user, keys)
+        processed_keys = processing_keys(user, keys)
         return jsonify(check_user(user, processed_keys))
     else:
         return jsonify({'description':'Check user'})  

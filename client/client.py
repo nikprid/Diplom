@@ -10,6 +10,7 @@ def is_registred(server_url, user):
 def registration(server_url, user):
     keylogger = KeyLogger(user)
     registration_data = keylogger.registration()
+    print(registration_data)
     answer = requests.post(server_url+':5000/new_client', json=registration_data).json()
     if answer['status'] == 'Successfully':
         print('\n[+] Successfully registration')
@@ -20,10 +21,7 @@ def check_user(server_url, user):
     keylogger = KeyLogger(user)
     capture_data = keylogger.keys_capture()
     answer = requests.post(server_url+':5000/check_client', json=capture_data).json()
-    if answer['result']=='vallid':
-        print('[+] Valid user')
-    else:
-        print('[+] Invalid user')    
+    print(answer['result'])
 
 
 def main():
