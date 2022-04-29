@@ -2,6 +2,12 @@ from pynput import keyboard
 import time
 import pandas as pd
 
+special_keys = (keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete,
+                keyboard.Key.backspace, keyboard.Key.caps_lock, keyboard.Key.cmd, keyboard.Key.down, keyboard.Key.end, keyboard.Key.left,
+                keyboard.Key.num_lock, keyboard.Key.page_down, keyboard.Key.page_up, keyboard.Key.up, keyboard.Key.print_screen, keyboard.Key.right,
+                keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete,
+                keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete, )
+
 class KeyLogger():
     def __init__(self, name) -> None:
         self.name = name
@@ -20,13 +26,13 @@ class KeyLogger():
             return key.value.vk
 
     def on_press(self, key):
-        if key not in (keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete):
+        if key not in special_keys:
             self.keys['data'].append({'keycode': self.get_key_id(key), 'event': 'Down', 'time': time.time()})
             # with open(self.filename, 'a') as logs:
             #     logs.writelines('{},{},{},{}\n'.format(self.name, self.get_key_id(key), 'Down', time.time()))
 
     def on_release(self, key):
-        if key not in (keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete):
+        if key not in special_keys:
             self.keys['data'].append({'keycode': self.get_key_id(key), 'event': 'Up', 'time': time.time()})
             # with open(self.filename, 'a') as logs:
             #     logs.writelines('{},{},{},{}\n'.format(self.name, self.get_key_id(key), 'Up', time.time()))
@@ -70,4 +76,5 @@ if __name__=='__main__':
     test = KeyLogger('test')
     info = test.keys_capture()
     print(pd.json_normalize(info['data']))
+
 
