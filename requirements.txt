@@ -1,0 +1,6 @@
+Flask==2.1.1
+numpy==1.22.3
+pandas==1.4.2
+pynput==1.7.6
+requests==2.27.1
+scikit-learn==1.0.2
