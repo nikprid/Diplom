@@ -54,7 +54,11 @@ def check_client():
         keys = data['data']
         keys = convert_json(keys)
         processed_keys = processing_keys(user, keys)
-        return jsonify(check_user(user, processed_keys))
+        proba = check_user(user, processed_keys)
+        if  proba>0.65:
+            return jsonify({'user':user, 'result': f'valid - {proba}'})
+        else:
+            return jsonify({'user':user, 'result': f'intruder - {proba}'})
     else:
         return jsonify({'description':'Check user'})  
 

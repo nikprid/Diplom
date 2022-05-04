@@ -32,7 +32,7 @@ class KeyLogger():
 
     def print_registration_information(self):        
         print('Введите следующий текст. В конце нажмите клавишу Enter.')
-        print('Идейные соображения высшего порядка, а также начало повседневной работы по формированию позиции требуют определения и уточнения новых предложений.')    
+        print('Идейные соображения высшего порядка, а также рамки и место обучения кадров')    
         input()
 
     def registration(self):
@@ -47,7 +47,7 @@ class KeyLogger():
 
     def is_ready_to_send(self):
         while True:
-            if len(self.keys['data'])>25 and self.keys['data'][-1]['event']=='Up':
+            if len(self.keys['data'])>40 and self.keys['data'][-1]['event']=='Up':
                 return
 
     def keys_capture(self):
