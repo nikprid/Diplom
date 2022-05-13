@@ -1,10 +1,12 @@
 from pynput import keyboard
 import time
-import pandas as pd
+import random
 
 special_keys = (keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete,
                 keyboard.Key.backspace, keyboard.Key.caps_lock, keyboard.Key.cmd, keyboard.Key.down, keyboard.Key.end, keyboard.Key.left,
                 keyboard.Key.num_lock, keyboard.Key.page_down, keyboard.Key.page_up, keyboard.Key.up, keyboard.Key.print_screen, keyboard.Key.right,)
+
+train_text_list = list(range(1, 7))          
 
 class KeyLogger():
     def __init__(self, name) -> None:
@@ -22,18 +24,27 @@ class KeyLogger():
             return key.value.vk
 
     def on_press(self, key):
-        if key not in special_keys:
-            self.keys['data'].append({'keycode': self.get_key_id(key), 'event': 'Down', 'time': time.time()})
+        try:
+            if not (self.keys['data'][-1]['event'] == 'Down' and self.get_key_id(key) == self.keys['data'][-1]['keycode']):
+                if key not in special_keys:
+                    self.keys['data'].append({'keycode': self.get_key_id(key), 'event': 'Down', 'time': time.time()})
+        except:
+            if key not in special_keys:
+                self.keys['data'].append({'keycode': self.get_key_id(key), 'event': 'Down', 'time': time.time()})        
 
 
     def on_release(self, key):
         if key not in special_keys:
             self.keys['data'].append({'keycode': self.get_key_id(key), 'event': 'Up', 'time': time.time()})
 
-    def print_registration_information(self):        
-        print('Введите следующий текст. В конце нажмите клавишу Enter.')
-        print('Идейные соображения высшего порядка, а также рамки и место обучения кадров')    
-        input()
+    def print_registration_information(self):  
+        selected_samples = random.sample(train_text_list, 2) 
+        for n in selected_samples:      
+            print('Введите следующий текст. В конце нажмите клавишу Enter.')
+            f = open(f"text_for_train/{n}.txt", "r")
+            print(f.read())    
+            input()
+            f.close()
 
     def registration(self):
         listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)
@@ -63,6 +74,6 @@ class KeyLogger():
 if __name__=='__main__':
     test = KeyLogger('test')
     info = test.keys_capture()
-    print(pd.json_normalize(info['data']))
+    print(info['data'])
 
 

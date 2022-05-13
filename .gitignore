@@ -5,3 +5,7 @@ __pycache__/
 .gitattributes
 ~*.*
 .gitignore
+*.png
+*.docx
+*.pdf
+*.drawio

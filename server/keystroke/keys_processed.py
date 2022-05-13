@@ -1,4 +1,3 @@
-#import glob 
 import pandas as pd
 import warnings
 warnings.filterwarnings('ignore')
@@ -15,9 +14,9 @@ def read_capture_data_from_file(user):
 def save_processed_data_to_file(user, data):
     data.to_csv(f'keystroke/userdata/processed_data/{user}_processed_data.csv', index=False) 
 
-def processing_keys(user, data):
+def processing_keys(data):
 
-    df = pd.DataFrame(columns=['keycode','HD','PPD','RPD', 'RRD', 'user'])
+    df = pd.DataFrame(columns=['keycode','HD','PPD','RPD', 'RRD'])
 
     event_len = len(data)
 
@@ -34,7 +33,6 @@ def processing_keys(user, data):
             finalData['PPD'] = next_key_press_time-cur_key_press_time
             finalData['RPD'] = next_key_press_time-cur_key_release_time
             finalData['RRD'] = next_key_release_time-cur_key_release_time
-            finalData['user'] = user
             df = df.append(finalData,ignore_index=True)
 
     df.keycode = df.keycode.apply(int).apply(str) 

