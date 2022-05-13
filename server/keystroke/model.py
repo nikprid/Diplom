@@ -6,7 +6,7 @@ from sklearn.svm import OneClassSVM
 
 def create_and_train_model(user):
     scaler = Normalizer()
-    data = pd.read_csv(f'keystroke/userdata/processed_data/{user}_processed_data.csv')[:50]
+    data = pd.read_csv(f'keystroke/userdata/processed_data/{user}_processed_data.csv')[:300]
     col_names = ['HD', 'PPD', 'RPD', 'RRD']
     data_s = scaler.fit_transform(data[col_names])
     data_s = pd.DataFrame(data_s, columns = col_names)
