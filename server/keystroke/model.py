@@ -34,7 +34,10 @@ def check_user(user, data):
     loaded_model = joblib.load(filename_model)
     pred = loaded_model.predict(data_s)
     _, counts = np.unique(pred, return_counts=True)
-    return counts[1]/len(data)  
+    try:
+        return counts[1]/len(data)
+    except:
+        return counts[0]/len(data)      
     
 
 
