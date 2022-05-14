@@ -35,6 +35,4 @@ def processing_keys(data):
             finalData['RRD'] = next_key_release_time-cur_key_release_time
             df = df.append(finalData,ignore_index=True)
 
-    df.keycode = df.keycode.apply(int).apply(str) 
-
     return df       
