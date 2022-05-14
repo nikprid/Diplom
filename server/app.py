@@ -61,7 +61,7 @@ def check_client():
         user = data['user']
         keys = data['data']
         keys = convert_json(keys)
-        processed_keys = processing_keys(user, keys)
+        processed_keys = processing_keys(keys)
         proba = check_user(user, processed_keys)
         write_to_log_file(user, proba)
         if  proba>0.7:
