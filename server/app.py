@@ -64,9 +64,10 @@ def check_client():
         processed_keys = processing_keys(user, keys)
         proba = check_user(user, processed_keys)
         write_to_log_file(user, proba)
-        if  proba>0.65:
+        if  proba>0.7:
             return jsonify({'user':user, 'result': f'valid - {proba}'})
         else:
+            print(f'[WARNING] {user} - {proba}')
             return jsonify({'user':user, 'result': f'intruder - {proba}'})
     else:
         return jsonify({'description':'Check user'})  
