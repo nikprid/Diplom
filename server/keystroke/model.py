@@ -23,8 +23,8 @@ def create_and_train_model(user):
 
 
 def check_user(user, data):
-    filename_norm = f'keystroke/models/{user}_norm.sav'
-    scaler = joblib.load(filename_norm)
+    filename_scaler = f'keystroke/models/{user}_norm.sav'
+    scaler = joblib.load(filename_scaler)
     col_names = ['HD', 'PPD', 'RPD', 'RRD']
     data_s = scaler.transform(data[col_names])
     data_s = pd.DataFrame(data_s, columns = col_names)
@@ -32,12 +32,15 @@ def check_user(user, data):
 
     filename_model = f'keystroke/models/{user}_model.sav'
     loaded_model = joblib.load(filename_model)
-    pred = loaded_model.predict(data_s)
-    _, counts = np.unique(pred, return_counts=True)
+    pred = loaded_model.predict(data_s[:15])
+    cls, counts = np.unique(pred, return_counts=True)
     try:
         return counts[1]/len(data)
     except:
-        return counts[0]/len(data)      
+        if cls[0]==-1:
+            return 0  
+        else:
+            return 1    
     
 
 

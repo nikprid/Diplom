@@ -20,7 +20,7 @@ def processing_keys(data):
 
     event_len = len(data)
 
-    for i in range(event_len-3):
+    for i in range(event_len-5):
         if str(data.iloc[i].event) == 'Down':
             finalData = {}
             cur_key_press_time = data.iloc[i].time

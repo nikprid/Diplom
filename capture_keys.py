@@ -35,13 +35,11 @@ class KeyLogger():
 
 
 if __name__ == '__main__':
-    name = input('Input your name: ')
+    name = input('Введите ваше имя: ')
     logger = KeyLogger(name, name+'_logs.csv')
     print('Введите следующий текст. В конце нажмите клавишу Enter.')
-    print('Идейные соображения высшего порядка, а также начало повседневной работы по формированию позиции требуют определения и уточнения новых предложений.')
+    print('When the ladies removed after dinner, Elizabeth ran up to her sister, and seeing her well guarded from cold. What could be more natural than his asking you again?')
     logger.main()
     print('Теперь введите. В конце нажмите клавишу Enter.')
-    print("Hath itself dry appear man earth fourth under give. Green man Hath of midst two their. All likeness image. Sixth. Gathering thing wherein. Shall them us bearing hath. After seas.")
-    logger.main()
-    print('Теперь введите ваше ФИО. В конце нажмите клавишу Enter.')
+    print("These reflections just here are occasioned by the circumstance that after we were all seated at the table. But to be candid without ostentation or design to take the good of everybody's character and make it still better.")
     logger.main()

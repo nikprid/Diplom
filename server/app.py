@@ -15,11 +15,11 @@ def find_user(user):
 
 def add_user(user):
     with open('users.txt', 'a+') as f:
-        f.write(f'\n{user}')
+        f.write(f'{user}\n')
 
 def write_to_log_file(user, proba):
-    with open('users.txt', 'a+') as f:
-        f.write(f'\n[+] {datetime.datetime.now()} - {user} - {proba}')
+    with open('server_logs.txt', 'a+') as f:
+        f.write(f'[{datetime.datetime.now()}] - {user} - {proba}\n')
 
 @app.route("/new_client",  methods=['GET', 'POST'])
 def new_client():
@@ -67,7 +67,7 @@ def check_client():
         if  proba>0.7:
             return jsonify({'user':user, 'result': f'valid - {proba}'})
         else:
-            print(f'[WARNING] {user} - {proba}')
+            print(f'[!!!] {user} - {proba}')
             return jsonify({'user':user, 'result': f'intruder - {proba}'})
     else:
         return jsonify({'description':'Check user'})  
